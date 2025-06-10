@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { lazy, Suspense } from "react";
+import Navigation from "./components/Navigation/Navigation";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -12,6 +13,7 @@ const MovieDetailsPage = lazy(() =>
 function App() {
   return (
     <>
+      <Navigation />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
