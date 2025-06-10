@@ -1,0 +1,24 @@
+.details {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+
+  margin-top: 16px;
+}
+
+.details img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.info_layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.genres {
+  display: flex;
+  gap: 8px;
+}

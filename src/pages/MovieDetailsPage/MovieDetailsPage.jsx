@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { loadMovieDetails } from "../../api/MoviesApi";
+import styles from "./MovieDetailsPage.module.css";
+import formatImageUrl from "../../api/ImageHelper";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -23,10 +25,35 @@ const MovieDetailsPage = () => {
   const backLinkHref = location.state ?? "/movies";
 
   return (
-    <div>
+    <div style={{ padding: "16px" }}>
       <Link to={backLinkHref}>← Back</Link>
-      <p>Details of movie {movieId}</p>
-      {movie !== null && <p>{movie.title}</p>}
+      {movie != null && (
+        <>
+          <div className={styles.details}>
+            <img
+              width="200"
+              height="300"
+              src={formatImageUrl(movie.poster_path)}
+              alt="Moview poster"
+            />
+
+            <div className={styles.info_layout}>
+              <h2>{movie.title}</h2>
+              <p>User score: {Math.round(movie.vote_average * 10)}%</p>
+
+              <h3>Overview</h3>
+              <p>{movie.overview}</p>
+
+              <h3>Genres</h3>
+              <div className={styles.genres}>
+                {movie.genres.map((genre) => {
+                  return <p>{genre.name}</p>;
+                })}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
