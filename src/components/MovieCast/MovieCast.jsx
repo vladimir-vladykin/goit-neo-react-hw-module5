@@ -21,22 +21,27 @@ const MovieCast = () => {
   }, [movieId]);
 
   return (
-    <ul>
-      {cast.map((castItem) => {
-        return (
-          <li key={castItem.id}>
-            <p>{castItem.name}</p>
-            <p>Character: {castItem.character}</p>
-            <img
-              width="100"
-              height="200"
-              src={formatCastImageUrl(castItem.profile_path)}
-              alt="Actor image"
-            />
-          </li>
-        );
-      })}
-    </ul>
+    <div>
+      <ul>
+        {cast.length === 0 && (
+          <p>We don't have cast information for this movie.</p>
+        )}
+        {cast.map((castItem) => {
+          return (
+            <li key={castItem.id}>
+              <p>{castItem.name}</p>
+              <p>Character: {castItem.character}</p>
+              <img
+                width="100"
+                height="200"
+                src={formatCastImageUrl(castItem.profile_path)}
+                alt="Actor image"
+              />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 
