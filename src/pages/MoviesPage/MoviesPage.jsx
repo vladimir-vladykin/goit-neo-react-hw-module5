@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { searchMovies } from "../../api/MoviesApi";
 import MovieList from "../../components/MovieList/MovieList";
+import { useSearchParams } from "react-router-dom";
 
 const MoviesPage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
+
+  const searchQuery = searchParams.get("query");
 
   useEffect(() => {
     async function fetch() {
@@ -16,7 +19,7 @@ const MoviesPage = () => {
       }
     }
 
-    if (searchQuery !== "") {
+    if (searchQuery !== null && searchQuery !== "") {
       fetch();
     }
   }, [searchQuery]);
@@ -29,13 +32,25 @@ const MoviesPage = () => {
       return;
     }
 
-    setSearchQuery(query);
+    const updatedSearchParams = new URLSearchParams(searchParams);
+    updatedSearchParams.set("query", query);
+
+    setSearchParams(updatedSearchParams);
   };
+
+  // prefill input with search param, if exists
+  const searchInputRef = useRef();
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.value = searchQuery || "";
+    }
+  }, [searchQuery]);
 
   return (
     <div style={{ padding: "16px" }}>
       <form onSubmit={handleFormSubmit}>
         <input
+          ref={searchInputRef}
           name="search"
           type="text"
           autoComplete="off"
