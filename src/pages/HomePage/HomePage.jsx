@@ -20,7 +20,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ padding: "16px" }}>
       <h1>Trending today</h1>
       <MovieList movies={movies} />
     </div>

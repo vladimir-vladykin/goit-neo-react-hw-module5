@@ -19,3 +19,9 @@ export async function loadMovieDetails(movieId) {
   const response = await axios.get(url, BASE_OPTIONS);
   return response.data;
 }
+
+export async function searchMovies(query) {
+  const url = `${BASE_URL}/search/movie?include_adult=false&language=en-US&page=1&query=${query}`;
+  const response = await axios.get(url, BASE_OPTIONS);
+  return response.data.results;
+}
