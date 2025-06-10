@@ -25,3 +25,9 @@ export async function searchMovies(query) {
   const response = await axios.get(url, BASE_OPTIONS);
   return response.data.results;
 }
+
+export async function loadCast(movieId) {
+  const url = `${BASE_URL}/movie/${movieId}/credits?language=en-US`;
+  const response = await axios.get(url, BASE_OPTIONS);
+  return response.data.cast;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useParams, useLocation, Link, Outlet } from "react-router-dom";
 import { loadMovieDetails } from "../../api/MoviesApi";
 import styles from "./MovieDetailsPage.module.css";
 import formatImageUrl from "../../api/ImageHelper";
@@ -27,6 +27,7 @@ const MovieDetailsPage = () => {
   return (
     <div style={{ padding: "16px" }}>
       <Link to={backLinkHref}>← Back</Link>
+
       {movie != null && (
         <>
           <div className={styles.details}>
@@ -47,13 +48,26 @@ const MovieDetailsPage = () => {
               <h3>Genres</h3>
               <div className={styles.genres}>
                 {movie.genres.map((genre) => {
-                  return <p>{genre.name}</p>;
+                  return <p key={genre.id}>{genre.name}</p>;
                 })}
               </div>
             </div>
           </div>
         </>
       )}
+
+      <div className={styles.divider}></div>
+      <p>Additional information</p>
+      <ul>
+        <li>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li>
+          <Link to="reviews">Reviews</Link>
+        </li>
+      </ul>
+      <div className={styles.divider}></div>
+      <Outlet />
     </div>
   );
 };
