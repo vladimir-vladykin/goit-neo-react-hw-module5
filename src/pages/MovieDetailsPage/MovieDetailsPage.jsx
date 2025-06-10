@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { loadMovieDetails } from "../../api/MoviesApi";
 
 const MovieDetailsPage = () => {
@@ -19,8 +19,12 @@ const MovieDetailsPage = () => {
     fetch();
   }, [movieId]);
 
+  const location = useLocation();
+  const backLinkHref = location.state ?? "/movies";
+
   return (
     <div>
+      <Link to={backLinkHref}>← Back</Link>
       <p>Details of movie {movieId}</p>
       {movie !== null && <p>{movie.title}</p>}
     </div>
