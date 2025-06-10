@@ -15,12 +15,6 @@
 }
 
 /* #region Reset */
-ul,
-ol {
-  list-style-type: none;
-  margin: 0;
-  padding-left: 0;
-}
 p {
   margin: 0;
 }
