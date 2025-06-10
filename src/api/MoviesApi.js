@@ -31,3 +31,9 @@ export async function loadCast(movieId) {
   const response = await axios.get(url, BASE_OPTIONS);
   return response.data.cast;
 }
+
+export async function loadReviews(movieId) {
+  const url = `${BASE_URL}/movie/${movieId}/reviews?language=en-US&page=1`;
+  const response = await axios.get(url, BASE_OPTIONS);
+  return response.data.results;
+}

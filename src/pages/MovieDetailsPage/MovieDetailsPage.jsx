@@ -25,7 +25,7 @@ const MovieDetailsPage = () => {
   const backLinkHref = location.state ?? "/movies";
 
   return (
-    <div style={{ padding: "16px" }}>
+    <div className={styles.root}>
       <Link to={backLinkHref}>← Back</Link>
 
       {movie != null && (
