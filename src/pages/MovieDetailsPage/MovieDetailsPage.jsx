@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useLocation, Link, Outlet } from "react-router-dom";
 import { loadMovieDetails } from "../../api/MoviesApi";
 import styles from "./MovieDetailsPage.module.css";
@@ -22,11 +22,11 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   const location = useLocation();
-  const backLinkHref = location.state ?? "/movies";
+  const locationRef = useRef(location.state);
 
   return (
     <div className={styles.root}>
-      <Link to={backLinkHref}>← Back</Link>
+      <Link to={locationRef.current ?? "/movies"}>← Back</Link>
 
       {movie != null && (
         <>
